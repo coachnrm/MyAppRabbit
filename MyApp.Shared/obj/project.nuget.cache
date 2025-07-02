@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZErm6sH6LJ8=",
+  "success": true,
+  "projectFilePath": "D:\\MyApp\\MyApp.Shared\\MyApp.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.5\\microsoft.netcore.app.ref.9.0.5.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.5\\microsoft.windowsdesktop.app.ref.9.0.5.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.5\\microsoft.aspnetcore.app.ref.9.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}

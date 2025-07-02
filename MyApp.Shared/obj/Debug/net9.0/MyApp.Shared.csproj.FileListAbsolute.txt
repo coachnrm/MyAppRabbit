@@ -1,0 +1,11 @@
+D:\MyApp\MyApp.Shared\bin\Debug\net9.0\MyApp.Shared.deps.json
+D:\MyApp\MyApp.Shared\bin\Debug\net9.0\MyApp.Shared.dll
+D:\MyApp\MyApp.Shared\bin\Debug\net9.0\MyApp.Shared.pdb
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.AssemblyInfoInputs.cache
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.AssemblyInfo.cs
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.csproj.CoreCompileInputs.cache
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.dll
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\refint\MyApp.Shared.dll
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.pdb
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\ref\MyApp.Shared.dll

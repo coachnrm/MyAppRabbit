@@ -1,0 +1,48 @@
+﻿@page "/send"
+@using MyApp.Shared
+@inject HttpClient Http
+
+<h3>Send a chat message</h3>
+
+<EditForm Model="@msg" OnValidSubmit="Send">
+    <div class="mb-3">
+        <label class="form-label">User</label>
+        <InputText @bind-Value="msg.User" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Message</label>
+        <InputTextArea @bind-Value="msg.Text" class="form-control" rows="3" />
+    </div>
+    <button class="btn btn-primary" type="submit" disabled="@sending">Send</button>
+</EditForm>
+
+@if (sent)
+{
+    <div class="alert alert-success mt-2">Sent!</div>
+}
+
+@code {
+    // Form model (mutable)
+    private class ChatMessageForm
+    {
+        public string User { get; set; } = "";
+        public string Text { get; set; } = "";
+    }
+
+    private ChatMessageForm msg = new();
+    private bool sending, sent;
+
+    private async Task Send()
+    {
+        sending = true;
+        sent = false;
+
+        // Convert to immutable ChatMessage before sending
+        await Http.PostAsJsonAsync("api/chat", 
+            new ChatMessage(msg.User, msg.Text, DateTime.UtcNow));
+
+        sending = false;
+        sent = true;
+        msg = new(); // Reset form
+    }
+}

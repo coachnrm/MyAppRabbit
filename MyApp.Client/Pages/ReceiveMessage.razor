@@ -1,0 +1,68 @@
+﻿@page "/chat"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager Navigation
+@implements IAsyncDisposable
+@using MyApp.Shared
+@inject HttpClient Http
+
+<h3>Live Chat</h3>
+
+<div class="chat-box">
+    @foreach (var msg in messages)
+    {
+        <div class="message">
+            <strong>@msg.User:</strong> @msg.Text
+            <small class="text-muted">@msg.Timestamp.ToShortTimeString()</small>
+        </div>
+    }
+</div>
+
+<style>
+    .chat-box {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+</style>
+
+@code {
+    private HubConnection? hubConnection;
+    private List<ChatMessage> messages = new();
+    private string? newMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Get Base URL from HttpClient
+        var baseUrl = Http.BaseAddress?.ToString() ?? Navigation.BaseUri;
+        var hubUrl = $"{baseUrl}chatHub"; // Append the Hub route
+
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(hubUrl)
+            .Build();
+
+        hubConnection.On<ChatMessage>("ReceiveChat", message =>
+        {
+            messages.Add(message);
+            StateHasChanged(); // Refresh UI
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection != null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}
