@@ -39,8 +39,7 @@
     private HubConnection? hubConnection;
     private List<ChatMessage> messages = new();
     private Queue<ChatMessage> messageQueue = new();
-    private Queue<ChatMessageString> messageQueue2 = new();
-    private List<ChatMessage> messages2 = new();
+    private Queue<ChatMessageString> messageQueueString = new();
     private bool isAnnouncing = false;
     private string? newMessage;
 
@@ -53,12 +52,6 @@
         hubConnection = new HubConnectionBuilder()
             .WithUrl(hubUrl)
             .Build();
-
-        @* hubConnection.On<ChatMessage>("ReceiveChat", message =>
-        {
-            messages.Add(message);
-            StateHasChanged(); // Refresh UI
-        }); *@
 
         hubConnection.On<ChatMessage>("ReceiveChat", async message =>
         {
@@ -80,11 +73,14 @@
         while (messageQueue.Count > 0)
         {
             var msg = messageQueue.Dequeue();
+       
             messages.Add(msg);
             StateHasChanged();
-
+            
             // Send user and text separately to be formatted in JS
-            await JS.InvokeVoidAsync("audioHelper2.announceWard", "สมชาย", "ซักประวัติ"); 
+            await JS.InvokeVoidAsync("audioHelper2.announceWard", msg.User, msg.Text); 
+        
+
 
             await Task.Delay(5000);
             messages.Remove(msg);
