@@ -35,3 +35,4 @@ D:\MyApp\MyApp.Api\obj\Debug\net9.0\refint\MyApp.Api.dll
 D:\MyApp\MyApp.Api\obj\Debug\net9.0\MyApp.Api.pdb
 D:\MyApp\MyApp.Api\obj\Debug\net9.0\MyApp.Api.genruntimeconfig.cache
 D:\MyApp\MyApp.Api\obj\Debug\net9.0\ref\MyApp.Api.dll
+D:\MyApp\MyApp.Api\obj\Debug\net9.0\MyApp.Api.sourcelink.json

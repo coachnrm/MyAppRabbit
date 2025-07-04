@@ -25,4 +25,10 @@ public class ChatHub : Hub
         // Broadcast to all clients (or process the message further)
         await Clients.All.SendAsync("ReceiveChat", message);
     }
+
+    public async Task SendMessageToServerWithString(string user, string text)
+    {
+        // Broadcast to all clients (or process the message further)
+        await Clients.All.SendAsync("ReceiveChatString", user, text);
+    }
 }

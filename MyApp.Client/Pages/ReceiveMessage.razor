@@ -3,6 +3,7 @@
 @inject NavigationManager Navigation
 @implements IAsyncDisposable
 @using MyApp.Shared
+@inject IJSRuntime JS
 @inject HttpClient Http
 
 <h3>Live Chat</h3>
@@ -37,6 +38,10 @@
 @code {
     private HubConnection? hubConnection;
     private List<ChatMessage> messages = new();
+    private Queue<ChatMessage> messageQueue = new();
+    private Queue<ChatMessageString> messageQueue2 = new();
+    private List<ChatMessage> messages2 = new();
+    private bool isAnnouncing = false;
     private string? newMessage;
 
     protected override async Task OnInitializedAsync()
@@ -49,14 +54,46 @@
             .WithUrl(hubUrl)
             .Build();
 
-        hubConnection.On<ChatMessage>("ReceiveChat", message =>
+        @* hubConnection.On<ChatMessage>("ReceiveChat", message =>
         {
             messages.Add(message);
             StateHasChanged(); // Refresh UI
+        }); *@
+
+        hubConnection.On<ChatMessage>("ReceiveChat", async message =>
+        {
+            messageQueue.Enqueue(message);
+            await ProcessQueue();
         });
+
 
         await hubConnection.StartAsync();
     }
+
+    private async Task ProcessQueue()
+    {
+        if (isAnnouncing || messageQueue.Count == 0)
+            return;
+
+        isAnnouncing = true;
+
+        while (messageQueue.Count > 0)
+        {
+            var msg = messageQueue.Dequeue();
+            messages.Add(msg);
+            StateHasChanged();
+
+            // Send user and text separately to be formatted in JS
+            await JS.InvokeVoidAsync("audioHelper2.announceWard", "สมชาย", "ซักประวัติ"); 
+
+            await Task.Delay(5000);
+            messages.Remove(msg);
+            StateHasChanged();
+        }
+
+        isAnnouncing = false;
+    }
+
 
     public async ValueTask DisposeAsync()
     {

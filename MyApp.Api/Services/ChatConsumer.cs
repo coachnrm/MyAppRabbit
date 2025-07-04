@@ -57,6 +57,7 @@ public class ChatConsumer : BackgroundService
 
             // Broadcast to all connected clients via SignalR
             await _hub.Clients.All.SendAsync("ReceiveChat", msg);
+            await _hub.Clients.All.SendAsync("ReceiveChatString", msg.User, msg.Text);
 
             _channel.BasicAck(ea.DeliveryTag, multiple: false);
         };

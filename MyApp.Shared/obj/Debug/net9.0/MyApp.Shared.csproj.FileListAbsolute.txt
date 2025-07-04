@@ -9,3 +9,4 @@ D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.dll
 D:\MyApp\MyApp.Shared\obj\Debug\net9.0\refint\MyApp.Shared.dll
 D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.pdb
 D:\MyApp\MyApp.Shared\obj\Debug\net9.0\ref\MyApp.Shared.dll
+D:\MyApp\MyApp.Shared\obj\Debug\net9.0\MyApp.Shared.sourcelink.json
